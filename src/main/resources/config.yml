@@ -56,4 +56,4 @@ messages:
   cooldown: "&cCooling down! Wait {s} seconds to use command again."
 
 # Changing this value will wipe your config!
-config_version: 3
+config_version: 4

@@ -226,7 +226,7 @@ public class Plugin extends JavaPlugin {
     @Override public void onEnable() {
         saveDefaultConfig();
         config = getConfig();
-        int version = 3;
+        int version = 4;
         if (config.getInt("config_version") != version) {
             log("Config version mismatch! Renaming current config file and reloading...");
             File configFile = new File(getDataFolder(), "config.yml");
