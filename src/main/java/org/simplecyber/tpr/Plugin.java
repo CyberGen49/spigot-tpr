@@ -2,6 +2,7 @@ package org.simplecyber.tpr;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -71,6 +72,7 @@ public class Plugin extends JavaPlugin {
         log("Config reloaded!");
     }
 
+    HashMap<String, Long> cooldowns = new HashMap<>();
     public boolean cmd_tpr(CommandSender sender, Command cmd, String[] args) {
         // If the sender is the console, stop here
         if (sender instanceof ConsoleCommandSender) {
@@ -89,6 +91,7 @@ public class Plugin extends JavaPlugin {
         boolean blockOverworld = config.getBoolean("blocked_dimensions.overworld");
         boolean blockNether = config.getBoolean("blocked_dimensions.nether");
         boolean blockEnd = config.getBoolean("blocked_dimensions.end");
+        int cooldownTime = config.getInt("cooldown");
         int maxTries = config.getInt("max_tries");
         // Set some variables
         Player player = (Player) sender;
@@ -96,6 +99,19 @@ public class Plugin extends JavaPlugin {
         Location loc = null;
         boolean isValid = false;
         int tries = 0;
+        // Check cooldown
+        if (cooldowns.containsKey(player.getName()) && !player.hasPermission("cybertpr.cooldown.exempt")) {
+            long lastRun = cooldowns.get(player.getName());
+            long msSinceLastRun = (System.currentTimeMillis() - lastRun);
+            long msLeft = ((cooldownTime * 1000) - msSinceLastRun);
+            if (msLeft > 0) {
+                sendMsg(player, bulkReplace(
+                    config.getString("messages.cooldown"),
+                    new Object[]{ "{s}" },
+                    new Object[]{ Math.round(msLeft/1000) }));
+                return true;
+            }
+        }
         // Check dimension
         Environment env = world.getEnvironment();
         if (blockOverworld && env == Environment.NORMAL || blockNether && env == Environment.NETHER || blockEnd && env == Environment.THE_END) {
@@ -116,6 +132,7 @@ public class Plugin extends JavaPlugin {
         }
         // Loop until we find a safe spot or run out of tries
         sendMsg(player, config.getString("messages.searching"));
+        cooldowns.put(player.getName(), System.currentTimeMillis());
         log("Searching for safe locations within " + radius + " blocks of (" + originX + ", " + originZ + ")...");
         while (!isValid && tries < maxTries) {
             tries++;

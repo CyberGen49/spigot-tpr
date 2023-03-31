@@ -38,6 +38,11 @@ blocked_dimensions:
   nether: true
   end: true
 
+# The number of seconds players will need to wait between uses of /tpr
+# Players with the cybertpr.cooldown.exempt permission are exempt from cooldowns
+# Cooldowns won't persist between server restarts
+cooldown: 300
+
 # Try to find a safe location this many times before giving up
 max_tries: 5
 
@@ -48,6 +53,7 @@ messages:
   teleporting: "&aSending you to &e{x}, {y}, {z}&a..."
   world_blocked: "&cYou can't teleport randomly in this world!"
   dimension_blocked: "&cYou can't teleport randomly in this dimension!"
+  cooldown: "&cCooling down! Wait {s} seconds to use command again."
 
 # Changing this value will wipe your config!
 config_version: 3
