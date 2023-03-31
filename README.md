@@ -9,5 +9,5 @@ A simple random teleportation plugin for Spigot Minecraft servers.
 See the comments in [config.yml](/src/main/resources/config.yml) for config documentation.
 
 ## Permissions
-* `cybertpr.player.tpr`: Allows the player to use `/tpr`
-* `cybertpr.admin`: Allows the player to use `/cybertpr reload`
+* `cybertpr.player`: Allows the player to use `/tpr`. All players have this by default.
+* `cybertpr.admin`: Allows the player to use `/cybertpr reload`.

@@ -1,6 +1,7 @@
 package org.simplecyber.tpr;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -15,6 +16,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerCommandSendEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Plugin extends JavaPlugin {
@@ -67,6 +70,7 @@ public class Plugin extends JavaPlugin {
         saveDefaultConfig();
         reloadConfig();
         config = getConfig();
+        log("Config reloaded!");
     }
 
     public boolean cmd_tpr(CommandSender sender, Command cmd, String[] args) {
@@ -166,8 +170,9 @@ public class Plugin extends JavaPlugin {
     }
 
     public boolean cmd_cybertpr(CommandSender sender, Command cmd, String[] args) {
-        if (args.length == 0) {
-            sendMsg(sender, "&cUsage: /cybertpr <reload>");
+        if (args.length == 0 || !sender.hasPermission("cybertpr.admin")) {
+            sendMsg(sender, "&bCyberTPR &3v" + getDescription().getVersion());
+            sendMsg(sender, "&9https://github.com/CyberGen49/spigot-tpr");
             return true;
         }
         switch (args[0]) {
@@ -175,6 +180,8 @@ public class Plugin extends JavaPlugin {
                 reload();
                 sendMsg(sender, "&aReloaded config!");
                 break;
+            default:
+                return cmd_cybertpr(sender, cmd, new String[0]);
         }
         return true;
     }
@@ -187,6 +194,18 @@ public class Plugin extends JavaPlugin {
                 return cmd_cybertpr(sender, cmd, args);
         }
         return false;
+    }
+
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+        List<String> options = new ArrayList<>();
+        switch (cmd.getName().toLowerCase()) {
+            case "cybertpr":
+                if (args.length == 1 && sender.hasPermission("cybertpr.admin")) {
+                    options.add("reload");
+                }
+                break;
+        }
+        return options;
     }
 
     @Override public void onEnable() {
