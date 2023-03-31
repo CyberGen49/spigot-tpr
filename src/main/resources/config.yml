@@ -8,7 +8,7 @@ origin:
 
 # Players can randomly teleport up to this many blocks away from the origin
 # (defined above)
-radius: 1000
+radius: 10000
 
 # Locations will only be considered safe if they're at or above this Y level
 # This is to prevent teleporting into open ravines, for example
