@@ -1,14 +1,13 @@
 
 # CyberTPR Configuration
 
+# Players can randomly teleport up to this many blocks away from the origin
+radius: 10000
+
 # The point around which players can teleport
 origin:
   x: 0
   z: 0
-
-# Players can randomly teleport up to this many blocks away from the origin
-# (defined above)
-radius: 10000
 
 # Locations will only be considered safe if they're at or above this Y level
 # This is to prevent teleporting into open ravines, for example
@@ -23,17 +22,17 @@ unsafe_blocks:
   - PACKED_ICE
   - BLUE_ICE
 
-# When true, players will be able to use /tpr in all worlds except those listed
-# under blocked_worlds. When false, players will only be able to use /tpr in the
-# worlds listed under allowed_worlds.
+# World access
 worlds:
+  # When true, /tpr will work in all worlds except those listed under blocked
+  # When false, /tpr can only be used in the worlds listed under allowed
   allow_by_default: true
   allowed:
     - my allowed world
   blocked:
     - my blocked world
 
-# When true, players can't use /tpr in that dimension
+# When true, players can't use /tpr in the corresponding dimension
 blocked_dimensions:
   overworld: false
   nether: true
