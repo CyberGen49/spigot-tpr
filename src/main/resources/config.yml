@@ -1,0 +1,54 @@
+
+# CyberTPR Configuration
+
+# The point around which players can teleport
+origin:
+  x: 0
+  z: 0
+
+# Players can randomly teleport up to this many blocks away from the origin
+# (defined above)
+radius: 1000
+
+# Locations will only be considered safe if they're at or above this Y level
+# This is to prevent teleporting into open ravines, for example
+safe_y: 62
+
+# Locations on these blocks will be considered unsafe
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+unsafe_blocks:
+  - WATER
+  - LAVA
+  - ICE
+  - PACKED_ICE
+  - BLUE_ICE
+
+# When true, players will be able to use /tpr in all worlds except those listed
+# under blocked_worlds. When false, players will only be able to use /tpr in the
+# worlds listed under allowed_worlds.
+worlds:
+  allow_by_default: true
+  allowed:
+    - my allowed world
+  blocked:
+    - my blocked world
+
+# When true, players can't use /tpr in that dimension
+blocked_dimensions:
+  overworld: false
+  nether: true
+  end: true
+
+# Try to find a safe location this many times before giving up
+max_tries: 5
+
+# Messages
+messages:
+  searching: "&7Searching for a safe spot..."
+  search_fail: "&cFailed to find a safe location!"
+  teleporting: "&aSending you to &e{x}, {y}, {z}&a..."
+  world_blocked: "&cYou can't teleport randomly in this world!"
+  dimension_blocked: "&cYou can't teleport randomly in this dimension!"
+
+# Changing this value will wipe your config!
+config_version: 3
