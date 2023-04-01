@@ -1,6 +1,8 @@
 # CyberTPR
 A simple random teleportation plugin for Spigot Minecraft servers.
 
+**Note:** Random teleportation into unloaded chunks can cause a lot of server lag! Consider using a plugin like [Chunky](https://www.spigotmc.org/resources/chunky.81534/) to pre-load your entire TPR area.
+
 ## Commands
 * `/tpr`: Teleport to a random, safe location.
 * `/cybertpr`: Outputs the plugin name and version, along with a link to this repository.
