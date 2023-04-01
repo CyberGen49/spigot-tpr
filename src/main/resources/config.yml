@@ -2,7 +2,7 @@
 # CyberTPR Configuration
 
 # Players can randomly teleport up to this many blocks away from the origin
-radius: 10000
+radius: 5000
 
 # The point around which players can teleport
 origin:
@@ -53,7 +53,7 @@ messages:
   teleporting: "&aSending you to &e{x}, {y}, {z}&a..."
   world_blocked: "&cYou can't teleport randomly in this world!"
   dimension_blocked: "&cYou can't teleport randomly in this dimension!"
-  cooldown: "&cCooling down! Wait {s} seconds to use command again."
+  cooldown: "&cCooling down! Wait {s} seconds before teleporting again."
 
 # Changing this value will wipe your config!
-config_version: 4
+config_version: 5

@@ -1,7 +1,7 @@
 main: org.simplecyber.tpr.Plugin
 name: CyberTPR
 api-version: 1.19
-version: 1.2.1
+version: 1.2.2
 description: Let users teleport to random locations within a set radius of spawn.
 commands:
   tpr:
@@ -11,7 +11,10 @@ commands:
   cybertpr:
     usage: /cybertpr [reload]
     description: Manage CyberTPR.
+    permission: cybertpr.info
 permissions:
+  cybertpr.info:
+    default: true
   cybertpr.player:
     default: true
   cybertpr.cooldown.exempt:

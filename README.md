@@ -21,6 +21,7 @@ A simple random teleportation plugin for Spigot Minecraft servers.
 See the comments in [config.yml](/src/main/resources/config.yml) for config documentation.
 
 ## Permissions
+* `cybertpr.info`: Allows the player to use `/cybertpr`. All players have this by default.
 * `cybertpr.player`: Allows the player to use `/tpr`. All players have this by default.
 * `cybertpr.cooldown.exempt`: Allows the player to bypass the configured cooldown.
 * `cybertpr.admin`: Allows the player to use `/cybertpr reload`.
