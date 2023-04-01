@@ -93,6 +93,13 @@ public class Plugin extends JavaPlugin {
         boolean blockEnd = config.getBoolean("blocked_dimensions.end");
         int cooldownTime = config.getInt("cooldown");
         int maxTries = config.getInt("max_tries");
+        // Update and check unsafe blocks
+        for (int i = 0; i < unsafeBlocks.size(); i++) {
+            unsafeBlocks.set(i, unsafeBlocks.get(i).toUpperCase());
+            if (Material.getMaterial(unsafeBlocks.get(i)) == null) {
+                log("warning", unsafeBlocks.get(i) + " isn't a recognized material!");
+            }
+        }
         // Set some variables
         Player player = (Player) sender;
         World world = player.getWorld();
@@ -193,7 +200,7 @@ public class Plugin extends JavaPlugin {
         switch (args[0]) {
             case "reload":
                 reload();
-                sendMsg(sender, "&aReloaded config!");
+                sendMsg(sender, config.getString("messages.reloaded"));
                 break;
             default:
                 return cmd_cybertpr(sender, cmd, new String[0]);
@@ -226,7 +233,7 @@ public class Plugin extends JavaPlugin {
     @Override public void onEnable() {
         saveDefaultConfig();
         config = getConfig();
-        int version = 5;
+        int version = 6;
         if (config.getInt("config_version") != version) {
             log("Config version mismatch! Renaming current config file and reloading...");
             File configFile = new File(getDataFolder(), "config.yml");

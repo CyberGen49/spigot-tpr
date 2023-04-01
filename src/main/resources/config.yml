@@ -13,14 +13,14 @@ origin:
 # This is to prevent teleporting into open ravines, for example
 safe_y: 62
 
-# Locations on these blocks will be considered unsafe
+# Locations on these blocks will be considered unsafe (case-insensitive)
 # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
 unsafe_blocks:
-  - WATER
-  - LAVA
-  - ICE
-  - PACKED_ICE
-  - BLUE_ICE
+  - water
+  - lava
+  - ice
+  - packed_ice
+  - blue_ice
 
 # World access
 worlds:
@@ -54,6 +54,7 @@ messages:
   world_blocked: "&cYou can't teleport randomly in this world!"
   dimension_blocked: "&cYou can't teleport randomly in this dimension!"
   cooldown: "&cCooling down! Wait {s} seconds before teleporting again."
+  reloaded: "&aConfig reloaded!"
 
 # Changing this value will wipe your config!
-config_version: 5
+config_version: 6
