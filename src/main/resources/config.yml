@@ -44,17 +44,19 @@ blocked_dimensions:
 cooldown: 300
 
 # Try to find a safe location this many times before giving up
+# If you preloaded your teleportation area, bunp this up a bunch
 max_tries: 5
 
 # Messages
 messages:
+  reloaded: "&aConfig reloaded!"
+  player_only: "&cOnly players can use this command!"
   searching: "&7Searching for a safe spot..."
   search_fail: "&cFailed to find a safe location!"
-  teleporting: "&aSending you to &e{x}, {y}, {z}&a..."
+  teleporting: "&aSending you to &e%0, %1, %2&a..."
   world_blocked: "&cYou can't teleport randomly in this world!"
   dimension_blocked: "&cYou can't teleport randomly in this dimension!"
-  cooldown: "&cCooling down! Wait {s} seconds before teleporting again."
-  reloaded: "&aConfig reloaded!"
+  cooldown: "&cCooling down! Wait %0 seconds before teleporting again."
 
 # Changing this value will wipe your config!
-config_version: 6
+config_version: 7

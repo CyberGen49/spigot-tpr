@@ -23,5 +23,5 @@ See the comments in [config.yml](/src/main/resources/config.yml) for config docu
 ## Permissions
 * `cybertpr.info`: Allows the player to use `/cybertpr`. All players have this by default.
 * `cybertpr.player`: Allows the player to use `/tpr`. All players have this by default.
-* `cybertpr.cooldown.exempt`: Allows the player to bypass the configured cooldown.
+* `cybertpr.player.bypassCooldown`: Allows the player to bypass the configured cooldown.
 * `cybertpr.admin`: Allows the player to use `/cybertpr reload`.
