@@ -110,6 +110,7 @@ public class Plugin extends JavaPlugin {
                 int originX = config.getInt("origin.x");
                 int originZ = config.getInt("origin.z");
                 int safeY = config.getInt("safe_y");
+                int unsafePlayerRadius = config.getInt("unsafe_nearby_player_radius");
                 List<String> unsafeBlocks = config.getStringList("unsafe_blocks");
                 List<String> worldsAllowed = config.getStringList("worlds.allowed");
                 List<String> worldsBlocked = config.getStringList("worlds.blocked");
@@ -192,6 +193,19 @@ public class Plugin extends JavaPlugin {
                         log("Block is in the list of unsafe blocks.");
                         continue;
                     }
+                    // If the block is too close to other players, log and skip
+                    boolean tooCloseToAnotherPlayer = false;
+                    for (Player otherPlayer : world.getPlayers()) {
+                        if (otherPlayer.equals(player)) continue;
+                        if (otherPlayer.getLocation().distance(loc) < unsafePlayerRadius) {
+                            tooCloseToAnotherPlayer = true;
+                            break;
+                        }
+                    }
+                    if (tooCloseToAnotherPlayer) {
+                        log("Block is too close to another player.");
+                        continue;
+                    }
                     // Add 1 to the Y coordinate and finish up
                     loc.setY(block.getY()+1);
                     isValid = true;
@@ -247,7 +261,7 @@ public class Plugin extends JavaPlugin {
     @Override public void onEnable() {
         saveDefaultConfig();
         config = getConfig();
-        int version = 7;
+        int version = 8;
         if (config.getInt("config_version") != version) {
             log("Config version mismatch! Renaming current config file and reloading...");
             File configFile = new File(getDataFolder(), "config.yml");

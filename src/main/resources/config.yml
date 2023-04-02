@@ -22,6 +22,9 @@ unsafe_blocks:
   - packed_ice
   - blue_ice
 
+# Locations within this many blocks of other players will be considered unsafe.
+unsafe_nearby_player_radius: 192
+
 # World access
 worlds:
   # When true, /tpr will work in all worlds except those listed under blocked
@@ -59,4 +62,4 @@ messages:
   cooldown: "&cCooling down! Wait %0 seconds before teleporting again."
 
 # Changing this value will wipe your config!
-config_version: 7
+config_version: 8
