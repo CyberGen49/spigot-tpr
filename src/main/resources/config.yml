@@ -1,13 +1,17 @@
 
 # CyberTPR Configuration
 
-# Players can randomly teleport up to this many blocks away from the origin
-radius: 5000
-
 # The point around which players can teleport
 origin:
   x: 0
   z: 0
+
+# Players can randomly teleport up to this many blocks away from the origin
+radius: 5000
+
+# Locations within this many blocks of the origin will be considered unsafe
+# This *must* be less than the radius defined above
+inner_radius: 500
 
 # Locations will only be considered safe if they're at or above this Y level
 # This is to prevent teleporting into open ravines, for example
@@ -62,4 +66,4 @@ messages:
   cooldown: "&cCooling down! Wait %0 seconds before teleporting again."
 
 # Changing this value will wipe your config!
-config_version: 8
+config_version: 9

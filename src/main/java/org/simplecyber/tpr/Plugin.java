@@ -107,6 +107,7 @@ public class Plugin extends JavaPlugin {
                 }
                 // Get config values
                 int radius = config.getInt("radius");
+                int radiusInner = config.getInt("inner_radius");
                 int originX = config.getInt("origin.x");
                 int originZ = config.getInt("origin.z");
                 int safeY = config.getInt("safe_y");
@@ -168,17 +169,15 @@ public class Plugin extends JavaPlugin {
                 while (!isValid && tries < maxTries) {
                     tries++;
                     // Get random X and Z coordinates
-                    int x = (int) (originX + ((Math.random() * 2) - 1) * radius);
-                    int z = (int) (originZ + ((Math.random() * 2) - 1) * radius);
+                    int coordTries = 0;
+                    int x; int z;
+                    do {
+                        x = (int) (originX + ((Math.random() * 2) - 1) * radius);
+                        z = (int) (originZ + ((Math.random() * 2) - 1) * radius);
+                        coordTries++;
+                    } while (coordTries < 100 && (x > originX-radiusInner || x < originX+radiusInner || z > originZ-radiusInner || z < originZ+radiusInner));
                     // Set our location
                     loc = new Location(world, x+0.5, 0, z+0.5);
-                    // Load the chunk
-                    boolean chunkLoadSuccessful = loc.getChunk().load();
-                    // If the chunk couldn't be loaded, log and skip
-                    if (!chunkLoadSuccessful) {
-                        log("warning", strFill("Failed to load chunk at (%0, %1)!", loc.getChunk().getX(), loc.getChunk().getZ()));
-                        continue;
-                    }
                     // Get the block at these coords
                     Block block = world.getHighestBlockAt(loc);
                     Material type = block.getType();
@@ -194,15 +193,15 @@ public class Plugin extends JavaPlugin {
                         continue;
                     }
                     // If the block is too close to other players, log and skip
-                    boolean tooCloseToAnotherPlayer = false;
+                    boolean isPlayerNearby = false;
                     for (Player otherPlayer : world.getPlayers()) {
                         if (otherPlayer.equals(player)) continue;
                         if (otherPlayer.getLocation().distance(loc) < unsafePlayerRadius) {
-                            tooCloseToAnotherPlayer = true;
+                            isPlayerNearby = true;
                             break;
                         }
                     }
-                    if (tooCloseToAnotherPlayer) {
+                    if (isPlayerNearby) {
                         log("Block is too close to another player.");
                         continue;
                     }
