@@ -18,7 +18,7 @@ permissions:
     default: true
   cybertpr.player:
     default: op
-    children:
-      cybertpr.player.bypassCooldown: true
+  cybertpr.player.bypassCooldown:
+    default: op
   cybertpr.admin:
     default: op
